@@ -26,8 +26,8 @@ class KRSController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'NIM' => 'required|exists:mahasiswas,NIM',
-            'Kode_mk' => 'required|exists:matakuliahs,Kode_mk',
+            'NIM' => 'required|exists:mahasiswa,NIM', // Ganti mahasiswas dengan mahasiswa
+            'Kode_mk' => 'required|exists:matakuliah,Kode_mk',
         ]);
 
         // Cek apakah KRS sudah ada
@@ -36,35 +36,34 @@ class KRSController extends Controller
                     ->exists();
 
         if ($exists) {
-            return redirect()->back()->with('error', 'KRS sudah ada');
+            return redirect()->back()->with('error', 'KRS sudah ada untuk mahasiswa dan matakuliah tersebut');
         }
 
         KRS::create($request->all());
         return redirect()->route('krs.index')->with('success', 'KRS berhasil ditambahkan');
     }
 
-    public function show(KRS $kr)
-    {
-        return view('krs.show', compact('kr'));
-    }
-
-    public function edit(KRS $kr)
-    {
-        $mahasiswas = Mahasiswa::all();
-        $matakuliahs = Matakuliah::all();
-        return view('krs.edit', compact('kr', 'mahasiswas', 'matakuliahs'));
-    }
-
     public function update(Request $request, KRS $kr)
     {
         $request->validate([
-            'NIM' => 'required|exists:mahasiswas,NIM',
-            'Kode_mk' => 'required|exists:matakuliahs,Kode_mk',
+            'NIM' => 'required|exists:mahasiswa,NIM', // Ganti mahasiswas dengan mahasiswa
+            'Kode_mk' => 'required|exists:matakuliah,Kode_mk',
         ]);
+
+        // Cek apakah kombinasi sudah ada di record lain
+        $exists = KRS::where('NIM', $request->NIM)
+                    ->where('Kode_mk', $request->Kode_mk)
+                    ->where('id', '!=', $kr->id)
+                    ->exists();
+
+        if ($exists) {
+            return redirect()->back()->with('error', 'KRS sudah ada untuk mahasiswa dan matakuliah tersebut');
+        }
 
         $kr->update($request->all());
         return redirect()->route('krs.index')->with('success', 'KRS berhasil diupdate');
     }
+
 
     public function destroy(KRS $kr)
     {

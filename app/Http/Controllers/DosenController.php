@@ -54,17 +54,32 @@ class DosenController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($NIP)
     {
-        //
+        $dosens = Dosen::findOrFail($NIP);
+        return view('dosen.edit', compact('dosens'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $NIP)
     {
-        //
+        $request->validate([
+            'Nama' => 'required',
+            'Alamat' => 'required',
+            'Nohp' => 'required|numeric',
+        ]);
+        
+        $dataEdit = [
+            'Nama'=> $request->Nama,
+            'Alamat'=>$request->Alamat,
+            'Nohp'=>$request->Nohp,
+            
+            
+        ];
+        Dosen::where('NIP', $NIP)->update($dataEdit);
+        return redirect()->route('dosen.index')->with('success', 'Data Dosen berhasil diupdate');
     }
 
     /**

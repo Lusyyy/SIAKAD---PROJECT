@@ -25,6 +25,8 @@ Route::get('ruang-pdf', [RuangController::class, 'downloadPDF'])->name('ruang.pd
 
 // Routes Dosen
 Route::resource('dosen', DosenController::class);
+Route::get('dosen/{NIP}/edit', [DosenController::class, 'edit'])->name('dosen.edit');
+Route::put('/dosen/{NIP}', [DosenController::class, 'update'])->name('dosen.update');
 Route::get('dosen-pdf', [DosenController::class, 'downloadPDF'])->name('dosen.pdf');
 
 // Routes Matakuliah
@@ -33,12 +35,19 @@ Route::get('matakuliah-pdf', [MatakuliahController::class, 'downloadPDF'])->name
 
 // Routes Mahasiswa
 Route::resource('mahasiswa', MahasiswaController::class);
+Route::get('/mahasiswa/{NIM}/edit', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
+Route::put('/mahasiswa/{NIM}', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
 Route::get('mahasiswa-pdf', [MahasiswaController::class, 'downloadPDF'])->name('mahasiswa.pdf');
 
 // Routes Jadwal Akademik
 Route::resource('jadwal', JadwalAkademikController::class);
 Route::get('jadwal-pdf', [JadwalAkademikController::class, 'downloadPDF'])->name('jadwal.pdf');
-
+// Routes Jadwal Akademik
+Route::resource('jadwal', JadwalAkademikController::class);
+Route::get('jadwal-pdf', [JadwalAkademikController::class, 'downloadPDF'])->name('jadwal.pdf');
+Route::get('jadwal-hari/{hari}', [JadwalAkademikController::class, 'jadwalPerHari'])->name('jadwal.per-hari');
+Route::get('jadwal-golongan/{id_Gol}', [JadwalAkademikController::class, 'jadwalPerGolongan'])->name('jadwal.per-golongan');
+Route::get('jadwal-pdf/{hari?}/{golongan?}', [JadwalAkademikController::class, 'downloadPDF'])->name('jadwal.pdf.filter');
 // Routes Pengampu
 Route::resource('pengampu', PengampuController::class);
 Route::get('pengampu-pdf', [PengampuController::class, 'downloadPDF'])->name('pengampu.pdf');

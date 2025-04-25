@@ -38,7 +38,8 @@
                             <td>{{ $dosen->Nohp }}</td>
                             
                             <td class="text-center">
-                                <a href="" class="btn btn-warning btn-sm">
+                                
+                                <a href="{{ route('dosen.edit', $dosen->NIP) }}" class="btn btn-warning btn-sm">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                                 <form action="" method="POST" class="d-inline">

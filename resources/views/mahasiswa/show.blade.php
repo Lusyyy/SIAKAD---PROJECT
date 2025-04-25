@@ -41,22 +41,10 @@
                             <th>Golongan</th>
                             <td>: {{ $mahasiswa->golongan->nama_Gol }}</td>
                         </tr>
+                        
                     </table>
                 </div>
                 
-                <div class="col-md-6">
-                    <!-- Informasi tambahan jika ada -->
-                    <div class="card border-primary">
-                        <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0">Informasi Akademik</h5>
-                        </div>
-                        <div class="card-body">
-                            <p><strong>Status:</strong> Aktif</p>
-                            <p><strong>Tahun Masuk:</strong> {{ date('Y') - (int)($mahasiswa->Semester / 2) }}</p>
-                            <!-- Tambahkan informasi lain jika diperlukan -->
-                        </div>
-                    </div>
-                </div>
             </div>
             
             <!-- Jika ingin menampilkan riwayat KRS -->

@@ -27,17 +27,17 @@ class MahasiswaController extends Controller
 
     public function create()
     {
-        $golongans = Golongan::all();
-        return view('mahasiswa.create', compact('golongans'));
+        $golongan = Golongan::all(); // ini ambil datanya
+        return view('mahasiswa.create', compact('golongan'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'NIM' => 'required|unique:mahasiswas',
+            'NIM' => 'required|unique:mahasiswa',
             'Nama' => 'required',
             'Semester' => 'required|numeric',
-            'id_Gol' => 'required|exists:golongans,id_Gol',
+            'id_Gol' => 'required|exists:golongan,id_Gol',
         ]);
 
         Mahasiswa::create($request->all());
@@ -49,21 +49,29 @@ class MahasiswaController extends Controller
         return view('mahasiswa.show', compact('mahasiswa'));
     }
 
-    public function edit(Mahasiswa $mahasiswa)
+    public function edit($NIM)
     {
+        $mahasiswas = Mahasiswa::findOrFail($NIM);
         $golongans = Golongan::all();
-        return view('mahasiswa.edit', compact('mahasiswa', 'golongans'));
+        return view('mahasiswa.edit', compact('mahasiswas', 'golongans'));
     }
 
-    public function update(Request $request, Mahasiswa $mahasiswa)
+    public function update(Request $request, $NIM)
     {
         $request->validate([
             'Nama' => 'required',
             'Semester' => 'required|numeric',
-            'id_Gol' => 'required|exists:golongans,id_Gol',
+            'id_Gol' => 'required|exists:golongan,id_Gol',
         ]);
-
-        $mahasiswa->update($request->all());
+        
+        $dataEdit = [
+            'Nama'=> $request->Nama,
+            'Alamat'=>$request->Alamat,
+            'Nohp'=>$request->Nohp,
+            'Semester'=>$request->Semester,
+            'id_Gol'=>$request->id_Gol
+        ];
+        Mahasiswa::where('NIM', $NIM)->update($dataEdit);
         return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil diupdate');
     }
 

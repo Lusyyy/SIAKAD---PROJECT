@@ -12,7 +12,10 @@ class GolonganSeeder extends Seeder
         $golongan = [
             ['nama_Gol' => 'Reguler A'],
             ['nama_Gol' => 'Reguler B'],
-            ['nama_Gol' => 'Kelas Karyawan'],
+            ['nama_Gol' => 'Reguler C'],
+            ['nama_Gol' => 'Reguler D'],
+            ['nama_Gol' => 'Reguler E'],
+            ['nama_Gol' => 'Internasional'],
         ];
 
         foreach ($golongan as $golongan) {
