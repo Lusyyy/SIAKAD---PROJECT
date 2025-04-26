@@ -78,9 +78,9 @@
                     </div>
                 </div>
 
-                <div class="alert alert-info">
+                <!-- <div class="alert alert-info">
                     <p class="mb-0"><i class="bi bi-info-circle"></i> Perhatikan bahwa satu ruang hanya dapat digunakan untuk satu jadwal pada hari yang sama.</p>
-                </div>
+                </div> -->
 
                 <div class="d-flex justify-content-between">
                     <a href="{{ route('jadwal.index') }}" class="btn btn-secondary">Kembali</a>

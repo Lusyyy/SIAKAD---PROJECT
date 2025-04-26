@@ -29,8 +29,8 @@ class PresensiAkademikController extends Controller
             'hari' => 'required',
             'tanggal' => 'required|date',
             'status_kehadiran' => 'required',
-            'NIM' => 'required|exists:mahasiswas,NIM',
-            'Kode_mk' => 'required|exists:matakuliahs,Kode_mk',
+            'NIM' => 'required|exists:mahasiswa,NIM',
+            'Kode_mk' => 'required|exists:matakuliah,Kode_mk',
         ]);
 
         PresensiAkademik::create($request->all());
@@ -55,8 +55,8 @@ class PresensiAkademikController extends Controller
             'hari' => 'required',
             'tanggal' => 'required|date',
             'status_kehadiran' => 'required',
-            'NIM' => 'required|exists:mahasiswas,NIM',
-            'Kode_mk' => 'required|exists:matakuliahs,Kode_mk',
+            'NIM' => 'required|exists:mahasiswa,NIM',
+            'Kode_mk' => 'required|exists:matakuliah,Kode_mk',
         ]);
 
         $presensi->update($request->all());

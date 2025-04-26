@@ -39,32 +39,7 @@
                         </div>
                     </div>
                     <div class="row mt-4">
-                        <div class="col-md-6 mb-3">
-                            <div class="card">
-                                <div class="card-header bg-primary text-white">
-                                    <h5 class="mb-0">Jadwal Hari Ini</h5>
-                                </div>
-                                <div class="card-body">
-                                    @php
-                                        $today = \Carbon\Carbon::now()->format('l');
-                                        $jadwals = \App\Models\JadwalAkademik::where('hari', $today)->with(['matakuliah', 'ruang', 'golongan'])->get();
-                                    @endphp
-                                    
-                                    @if($jadwals->count() > 0)
-                                        <ul class="list-group">
-                                            @foreach($jadwals as $jadwal)
-                                                <li class="list-group-item">
-                                                    <strong>{{ $jadwal->matakuliah->Nama_mk }}</strong> - {{ $jadwal->ruang->nama_ruang }}<br>
-                                                    <small>Golongan: {{ $jadwal->golongan->nama_Gol }}</small>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    @else
-                                        <p class="text-center">Tidak ada jadwal hari ini</p>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
+                        <!--  -->
                         <div class="col-md-6 mb-3">
                             <div class="card">
                                 <div class="card-header bg-success text-white">

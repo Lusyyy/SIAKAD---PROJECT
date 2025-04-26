@@ -17,21 +17,24 @@ class JadwalAkademikController extends Controller
         return view('jadwal.index', compact('jadwals'));
     }
 
+    
     public function create()
     {
         $matakuliahs = Matakuliah::all();
         $ruangs = Ruang::all();
         $golongans = Golongan::all();
+
         return view('jadwal.create', compact('matakuliahs', 'ruangs', 'golongans'));
     }
+
 
     public function store(Request $request)
     {
         $request->validate([
             'hari' => 'required',
-            'Kode_mk' => 'required|exists:matakuliahs,Kode_mk',
-            'id_ruang' => 'required|exists:ruangs,id_ruang',
-            'id_Gol' => 'required|exists:golongans,id_Gol',
+            'Kode_mk' => 'required|exists:matakuliah,Kode_mk',
+            'id_ruang' => 'required|exists:ruang,id_ruang',
+            'id_Gol' => 'required|exists:golongan,id_Gol',
         ]);
 
         // Cek apakah jadwal ruangan sudah digunakan pada hari yang sama

@@ -85,8 +85,9 @@ class DosenController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Dosen $dosen)
     {
-        //
+        $dosen->delete();
+        return redirect()->route('dosen.index')->with('success', 'Data dosen berhasil dihapus');
     }
 }
